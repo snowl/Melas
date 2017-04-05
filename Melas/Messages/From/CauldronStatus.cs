@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class CauldronStatus : ServerMessage
     {
@@ -13,11 +9,6 @@ namespace Melas.Messages
         public override void Deserialize(ByteReader Data)
         {
             String cauldron = Data.ReadString();
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

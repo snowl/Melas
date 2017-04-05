@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class RankedTimeoutDuration : ServerMessage
     {
@@ -16,11 +12,6 @@ namespace Melas.Messages
             if (timeout.Length == 0)
                 return;
             throw new Exception("Handle timeout");
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

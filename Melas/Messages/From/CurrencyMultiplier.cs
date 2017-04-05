@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class CurrencyMultiplier : ServerMessage
     {
@@ -18,11 +16,6 @@ namespace Melas.Messages
             List<int> multipliers = Data.ReadString().Split('*').Select(Int32.Parse).ToList();
             Paid = multipliers[0];
             Free = multipliers[1];
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

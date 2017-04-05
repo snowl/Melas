@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class UserStatistics : ServerMessage
     {
@@ -33,11 +31,6 @@ namespace Melas.Messages
             RankedDrawn = info[6];
             RankedDisconnected = info[7];
             ELO = info[8];
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class ActiveEvents : ServerMessage
     {
@@ -16,11 +12,6 @@ namespace Melas.Messages
             if (events.Length == 0)
                 return;
             throw new Exception("Handle active event");
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

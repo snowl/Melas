@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Melas
 {
+    public enum AFKStatus
+    {
+        Online,
+        AFK,
+        DCDueToInactivity
+    }
+
     public enum Server
     {
         Live,

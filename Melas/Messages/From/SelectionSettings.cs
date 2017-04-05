@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class SelectionSettings : ServerMessage
     {
@@ -37,11 +35,6 @@ namespace Melas.Messages
             ScrollB = int.Parse(options[7]);
             ScrollC = int.Parse(options[8]);
             NameChoice = options[9];
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

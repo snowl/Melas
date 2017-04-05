@@ -1,8 +1,8 @@
-﻿using Hina;
-using Melas.Messages;
+﻿using Melas.Messages;
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,6 +21,8 @@ namespace Melas
 
         // the number of bytes available in `buffer`
         int available;
+
+        Dictionary<byte, Type> PacketTypes = new Dictionary<byte, Type>();
         
         public Reader(Stream stream, CancellationToken cancellationToken)
         {
@@ -28,6 +30,19 @@ namespace Melas
             this.token = cancellationToken;
             this.buffer = new byte[DefaultBufferLength];
             this.available = 0;
+
+            var listOfMessages = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                            from assemblyType in domainAssembly.GetTypes()
+                            where typeof(ServerMessage).IsAssignableFrom(assemblyType)
+                            select assemblyType).ToArray();
+
+            foreach (Type t in listOfMessages)
+            {
+                if (t == typeof(ServerMessage))
+                    continue;
+                ServerMessage instance = (ServerMessage)Activator.CreateInstance(t);
+                PacketTypes.Add(instance.ID, t);
+            }
         }
 
         // this method must only be called once
@@ -72,7 +87,7 @@ namespace Melas
             available += read;
         }
 
-        unsafe void ReadFramesFromBuffer()
+        void ReadFramesFromBuffer()
         {
             // the index that we have successfully read into `buffer`. that is, all bytes before this have been
             // successfully read and processed into a valid packet.
@@ -83,15 +98,7 @@ namespace Melas
             {
                 if (available != index)
                 {
-                    fixed (byte* pSource = &buffer[index])
-                    fixed (byte* pDestination = &buffer[0])
-                    {
-                        Buffer.MemoryCopy(
-                            source: pSource,
-                            destination: pDestination,
-                            destinationSizeInBytes: buffer.Length,
-                            sourceBytesToCopy: available - index);
-                    }
+                    Buffer.BlockCopy(buffer, index, buffer, 0, available - index);
                 }
 
                 available -= index;
@@ -101,12 +108,18 @@ namespace Melas
         // Returns the bytes read
         int ReadMessage()
         {
-            ByteReader reader = new ByteReader(buffer);
+            ByteReader reader = new ByteReader(buffer, available);
+            reader.NeedsMoreData += async (s, e) =>
+            {
+                await ReadFromStreamAsync();
+                reader.ReplaceBuffer(buffer, available);
+            };
             byte ID = reader.ReadByte();
 
-            Console.WriteLine("Reading packet " + ID);
-            
-            Type type = Packets.List[ID];
+            Type type = PacketTypes[ID];
+            if (type == null)
+                Console.WriteLine("Got packet ID " + ID + "!");
+
             ServerMessage instance = (ServerMessage)Activator.CreateInstance(type);
             instance.Deserialize(reader);
 

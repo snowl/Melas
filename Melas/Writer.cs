@@ -1,6 +1,6 @@
 ﻿using Hina.Threading;
 using Melas.Messages;
-using System;
+using Melas.Messages.To;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
@@ -12,7 +12,7 @@ namespace Melas
     {
         readonly CancellationToken token;
         readonly AsyncAutoResetEvent reset;
-        readonly ConcurrentQueue<ServerMessage> queue;
+        readonly ConcurrentQueue<ClientMessage> queue;
         readonly Stream stream;
 
         public Writer(Stream stream, CancellationToken cancellationToken)
@@ -20,10 +20,10 @@ namespace Melas
             this.stream = stream;
             this.token = cancellationToken;
             this.reset = new AsyncAutoResetEvent();
-            this.queue = new ConcurrentQueue<ServerMessage>();
+            this.queue = new ConcurrentQueue<ClientMessage>();
         }
 
-        public void QueueWrite(ServerMessage message)
+        public void QueueWrite(ClientMessage message)
         {
             queue.Enqueue(message);
             reset.Set();

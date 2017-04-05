@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class FriendList : ServerMessage
     {
@@ -12,6 +12,7 @@ namespace Melas.Messages
 
         public override void Deserialize(ByteReader Data)
         {
+            Friends = new List<Friend>();
             string a = Data.ReadString();
             String[] friends = a.Split('*');
 
@@ -19,13 +20,9 @@ namespace Melas.Messages
             {
                 String[] temp = str.Split(',');
                 Friend friend = new Friend(int.Parse(temp[1]), temp[0]);
-                friend.Status = (Status)(temp[2][0]);
+                friend.Status = (Status)(temp[2][0] - 1);
+                Friends.Add(friend);
             }
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

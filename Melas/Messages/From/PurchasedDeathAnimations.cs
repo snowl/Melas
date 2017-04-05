@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class PurchasedDeathAnimations : ServerMessage
     {
@@ -13,11 +13,6 @@ namespace Melas.Messages
         public override void Deserialize(ByteReader Data)
         {
             Animations = Data.ReadString().Split(',').Select(Int32.Parse).ToList();
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

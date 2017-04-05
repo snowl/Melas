@@ -1,11 +1,12 @@
-﻿using System;
-using System.Net.Http;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Hina;
 using Melas.Messages;
+using Melas.Messages.To;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading;
-using Hina;
+using System.Threading.Tasks;
 
 namespace Melas
 {
@@ -65,7 +66,7 @@ namespace Melas
             this.Connected = true;
         }
 
-        public void WriteMessage(ServerMessage message)
+        public void WriteMessage(ClientMessage message)
         {
             this.writer.QueueWrite(message);
         }

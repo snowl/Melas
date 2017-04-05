@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Melas.Messages
+namespace Melas.Messages.From
 {
     public class SettingsInformation : ServerMessage
     {
@@ -33,11 +29,6 @@ namespace Melas.Messages
             Data.ReadByte(); // Unused
             TipBehaviour = Data.ReadByte();
             Data.ReadByte(); // 00
-        }
-
-        public override byte[] Serialize()
-        {
-            throw new NotImplementedException();
         }
     }
 }
