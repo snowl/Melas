@@ -6,7 +6,6 @@ namespace Melas.Messages.To
     public class RemoveFriend : ClientMessage
     {
         private Friend Friend;
-        private int Length;
 
         public RemoveFriend(Friend friend)
         {

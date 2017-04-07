@@ -1,15 +1,11 @@
 ﻿using CefSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
 
 namespace Melas.Client
 {
-    public class ResourceHandler : IResourceHandler
+    public class CustomSchemeHandler : IResourceHandler
     {
         private String File { get; set; }
 
@@ -53,14 +49,19 @@ namespace Melas.Client
             else
             {
                 responseLength = this.Stream.Length;
+                if (File.EndsWith(".html"))
+                    response.MimeType = "text/html";
+                else if (File.EndsWith(".js"))
+                    response.MimeType = "text/javascript";
+                else if (File.EndsWith(".css"))
+                    response.MimeType = "text/css";
                 redirectUrl = null;
             }
         }
 
         public bool ProcessRequest(IRequest request, ICallback callback)
         {
-            this.File = request.Url.Replace("http://", "");
-            this.File = this.File.Substring(0, this.File.Length - 1);
+            this.File = request.Url.Replace("custom://", "").Replace("/", "");
             callback.Continue();
             return true;
         }

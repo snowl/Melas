@@ -7,9 +7,5 @@
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
         Title="Melas" Height="600" Width="800">
-    <Grid>
-        <wpf:ChromiumWebBrowser Grid.Row="0"
-                                x:Name="Browser"
-                                Address="/index.html"/>
-    </Grid>
+    <Grid x:Name="WebGrid" Loaded="Grid_Loaded"/>
 </Window>

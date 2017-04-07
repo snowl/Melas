@@ -1,5 +1,7 @@
 ﻿using CefSharp;
+using CefSharp.Wpf;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Melas.Client
 {
@@ -8,11 +10,38 @@ namespace Melas.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ChromiumWebBrowser browser;
+
         public MainWindow()
         {
             InitializeComponent();
-            Browser.ResourceHandlerFactory = new ResourceHandlerFactory();
-            Browser.MenuHandler = new CustomMenuHandler();
+            this.KeyDown += MainWindow_KeyDown;
+        }
+
+        private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case System.Windows.Input.Key.F12:
+                    browser.ShowDevTools();
+                    break;
+            }
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            CefSettings settings = new CefSettings();
+            settings.RegisterScheme(new CefCustomScheme()
+            {
+                SchemeName = "custom",
+                SchemeHandlerFactory = new CustomSchemeHandlerFactory()
+            });
+            Cef.Initialize(settings);
+            browser = new ChromiumWebBrowser();
+            browser.MenuHandler = new CustomMenuHandler();
+            browser.Address = "custom://index.html/";
+            Grid.SetRow(browser, 0);
+            WebGrid.Children.Add(browser);
         }
     }
 

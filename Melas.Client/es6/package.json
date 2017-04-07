@@ -4,7 +4,7 @@
   "description": "The Town of Salem Client",
   "main": "index.js",
   "scripts": {
-      "postinstall": "webpack --config webpack.config.js"
+    "postinstall": "lessc css/base.less ../Resources/style.css && webpack --config webpack.config.js"
   },
   "dependencies": {
     "mobx": "^3.1.9",
@@ -18,9 +18,10 @@
     "@types/react": "^15.0.21",
     "@types/react-dom": "^0.14.23",
     "@types/react-router": "^4.0.4",
+    "awesome-typescript-loader": "^3.1.2",
+    "less": "^2.7.2",
     "typescript": "^2.1.5",
-    "webpack": "^2.3.3",
-    "awesome-typescript-loader": "^3.1.2"
+    "webpack": "^2.3.3"
   },
   "author": "David Diaz",
   "license": "MIT",

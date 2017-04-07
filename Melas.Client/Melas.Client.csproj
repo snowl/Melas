@@ -82,8 +82,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ResourceHandler.cs" />
-    <Compile Include="ResourceHandlerFactory.cs" />
+    <Compile Include="CustomSchemeHandlerFactory.cs" />
+    <Compile Include="CustomSchemeHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">
@@ -123,9 +123,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\.gitignore" />
-    <EmbeddedResource Include="Resources\bundle.js" />
-    <EmbeddedResource Include="Resources\index.html" />
-    <EmbeddedResource Include="Resources\style.css" />
+    <EmbeddedResource Include="Resources\bundle.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\cef.redist.x64.3.2883.1552\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2883.1552\build\cef.redist.x64.targets')" />
