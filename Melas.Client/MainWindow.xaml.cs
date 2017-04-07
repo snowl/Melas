@@ -11,10 +11,7 @@ namespace Melas.Client
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Browser_Loaded(object sender, RoutedEventArgs e)
-        {
+            Browser.ResourceHandlerFactory = new ResourceHandlerFactory();
             Browser.MenuHandler = new CustomMenuHandler();
         }
     }

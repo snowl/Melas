@@ -10,6 +10,6 @@
     <Grid>
         <wpf:ChromiumWebBrowser Grid.Row="0"
                                 x:Name="Browser"
-                                Address="http://www.google.com" Loaded="Browser_Loaded" />
+                                Address="/index.html"/>
     </Grid>
 </Window>

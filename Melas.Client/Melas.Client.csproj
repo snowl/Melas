@@ -58,18 +58,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CefSharp, Version=55.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CefSharp.Common.55.0.0\CefSharp\x64\CefSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.Core, Version=55.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CefSharp.Common.55.0.0\CefSharp\x64\CefSharp.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.Wpf, Version=55.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CefSharp.Wpf.55.0.0\CefSharp\x64\CefSharp.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -94,6 +82,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ResourceHandler.cs" />
+    <Compile Include="ResourceHandlerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">
@@ -131,6 +121,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\.gitignore" />
+    <EmbeddedResource Include="Resources\bundle.js" />
+    <EmbeddedResource Include="Resources\index.html" />
+    <EmbeddedResource Include="Resources\style.css" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\cef.redist.x64.3.2883.1552\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2883.1552\build\cef.redist.x64.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -145,10 +141,10 @@
     <Error Condition="!Exists('..\packages\CefSharp.Wpf.55.0.0\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.55.0.0\build\CefSharp.Wpf.targets'))" />
   </Target>
   <Import Project="..\packages\cef.redist.x86.3.2883.1552\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2883.1552\build\cef.redist.x86.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <Import Project="..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.Wpf.55.0.0\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.55.0.0\build\CefSharp.Wpf.targets')" />
-  <PropertyGroup>
-    <PreBuildEvent>CD $(ProjectDir)es6\
-CALL compile.bat</PreBuildEvent>
-  </PropertyGroup>
 </Project>
