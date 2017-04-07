@@ -31,7 +31,7 @@ namespace Melas
 
             if (required > 0)
             {
-                var newLength = Math.Max(source.Length * 2, source.Length + required);
+                var newLength = source.Length + required;
 
                 var destination = new byte[newLength];
 

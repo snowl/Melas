@@ -20,7 +20,7 @@ namespace Melas.Client.BrowserBridge
 
         private void Connection_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
-            browser.GetMainFrame().ExecuteJavaScriptAsync("__bridge.pushMessage(\"" + JsonConvert.SerializeObject(e.Body) + "\")");
+            browser.GetMainFrame().ExecuteJavaScriptAsync("__bridge.pushMessage(" + JsonConvert.SerializeObject(e.Body) + ")");
         }
 
         public void Login(string username, string password, IJavascriptCallback callback)

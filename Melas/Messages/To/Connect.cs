@@ -19,9 +19,9 @@ namespace Melas.Messages.To
             ByteWriter writer = new ByteWriter();
 
             writer.Write((byte)2); //ID 2
-            writer.Write((byte)3);
+            writer.Write((byte)2);
             writer.Write(this.Username);
-            writer.Write((byte)30);
+            writer.Write("*");
             writer.Write(this.AuthToken);
             writer.Write((byte)0);
 
