@@ -42,7 +42,7 @@ namespace Melas.Client
             browser = new ChromiumWebBrowser();
             browser.MenuHandler = new CustomMenuHandler();
             browser.Address = "custom://index.html/";
-            browser.RegisterAsyncJsObject("_bridge", new Bridge(), BindingOptions.DefaultBinder);
+            browser.RegisterAsyncJsObject("_bridge", new Bridge(browser), BindingOptions.DefaultBinder);
 
             Grid.SetRow(browser, 0);
             WebGrid.Children.Add(browser);

@@ -53,7 +53,7 @@ namespace Melas
 
             this.readerToken = new CancellationToken();
             this.reader = new Reader(stream, readerToken);
-            this.reader.MessageDeserialized += MessageReceived;
+            this.reader.MessageDeserialized += Reader_MessageDeserialized;
             this.reader.RunAsync().Forget();
 
             this.writerToken = new CancellationToken();
@@ -65,6 +65,11 @@ namespace Melas
 
             this.Connected = true;
             return true;
+        }
+
+        private void Reader_MessageDeserialized(object sender, MessageReceivedEventArgs e)
+        {
+            MessageReceived?.Invoke(sender, e);
         }
 
         public void WriteMessage(ClientMessage message)

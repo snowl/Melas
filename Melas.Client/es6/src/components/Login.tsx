@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Bridge, {LoginResult} from '../bridge/BrowserBridge'
+import ClientBridge, {LoginResult} from '../bridge/BrowserBridge'
 import {inject, observer} from 'mobx-react'
 import {observable} from 'mobx'
 
@@ -33,27 +33,38 @@ export default class Login extends React.Component<any, any>
 
     private connect = () =>
     {
-        var $this = this;
-        Bridge.login(this.username, this.password).then((data) =>
+        let $this = this;
+        ClientBridge.login(this.username, this.password, function(data: string)
         {
-            console.log(data);
+            let result: LoginResult = JSON.parse(data);
+            if (result.succeeded)
+            {
+                $this.props.clientStore.loggedIn = true;
+                $this.props.routing.push("/home");
+            }
+            else
+            {
+                $this.loginStatus = result;
+            }
         });
     };
 
     public render()
     {
         let error;
+        let errorClass = " hide";
 
         if (this.loginStatus != undefined
         && !this.loginStatus.succeeded)
         {
             error = this.loginStatus.message;
+            errorClass = "";
         }
 
         return <div className="Aligner">
             <div className="login-box">
                 <div className="text-center header">Melas</div>
-                <div className="text-center error">{error}</div>
+                <div className={"text-center error" + errorClass}>{error}</div>
                 <div className="input-holder">
                     <input type="text"
                            className="text-box"
