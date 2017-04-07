@@ -31,7 +31,7 @@ namespace Melas
             this.Type = type;
         }
 
-        public async void Connect()
+        public async Task<bool> Connect()
         {
             await GetAuthToken();
 
@@ -64,6 +64,7 @@ namespace Melas
             WriteMessage(connectPacket);
 
             this.Connected = true;
+            return true;
         }
 
         public void WriteMessage(ClientMessage message)

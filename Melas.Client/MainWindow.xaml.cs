@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.Wpf;
+using Melas.Client.BrowserBridge;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -37,9 +38,12 @@ namespace Melas.Client
                 SchemeHandlerFactory = new CustomSchemeHandlerFactory()
             });
             Cef.Initialize(settings);
+
             browser = new ChromiumWebBrowser();
             browser.MenuHandler = new CustomMenuHandler();
             browser.Address = "custom://index.html/";
+            browser.RegisterAsyncJsObject("_bridge", new Bridge(), BindingOptions.DefaultBinder);
+
             Grid.SetRow(browser, 0);
             WebGrid.Children.Add(browser);
         }

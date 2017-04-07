@@ -1,6 +1,95 @@
+@import 'colors.less';
+
+html,
+body,
+#react,
+#react > div,
+#react > div > .Aligner
+{
+    height: 100%;
+}
+
 body
 {
-    background-color: #fafafa;
+    font-family: 'Segoe Ui', sans-serif;
+    background-color: @background-color;
     margin: 0;
 }
 
+.Aligner
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box
+{
+    width: 40%;
+    min-width: 300px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+
+    & > .header
+    {
+        font-weight: lighter;
+        font-size: 40px;
+    }
+
+    & .input-holder
+    {
+        &:not(:first-of-type)
+        {
+            padding-top: 0;
+        }
+        padding: 10px;
+
+        input
+        {
+            border: 0px;
+            color: #CFCFCF;
+            height: 30px;
+            width: 100%;
+            font-size: 14px;
+            padding-left: 5px;
+            display: block;
+
+            &:focus
+            {
+                color: black;
+            }
+        }
+    }
+
+    & > .connect
+    {
+        margin: 0 -10px;
+        padding: 6px;
+        color: @base-button-text;
+        background-color: @base-button-color;
+
+        &:hover
+        {
+            cursor: pointer;
+            color: @base-button-hover-text;
+            background-color: @base-button-hover-color;
+        }
+    }
+}
+
+.hide
+{
+    display: none;
+}
+
+.error
+{
+    color: red;
+    font-weight: lighter;
+}
+
+.text-center
+{
+    text-align: center;
+}
