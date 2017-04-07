@@ -2,11 +2,11 @@
 
 namespace Melas.Messages.To
 {
-    public class AddFriend : ClientMessage
+    public class InvitePlayer : ClientMessage
     {
         private String Name;
 
-        public AddFriend(String Name)
+        public InvitePlayer(String Name)
         {
             this.Name = Name;
         }
@@ -15,7 +15,7 @@ namespace Melas.Messages.To
         {
             ByteWriter writer = new ByteWriter();
 
-            writer.Write((byte)25); // ID
+            writer.Write((byte)32); // ID
             writer.Write(Name);
             writer.Write((byte)0);
 

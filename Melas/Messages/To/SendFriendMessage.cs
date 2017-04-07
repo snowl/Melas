@@ -3,12 +3,12 @@ using System;
 
 namespace Melas.Messages.To
 {
-    public class FriendMessage : ClientMessage
+    public class SendFriendMessage : ClientMessage
     {
         private Friend Friend;
         private string Message;
 
-        public FriendMessage(Friend friend, String message)
+        public SendFriendMessage(Friend friend, String message)
         {
             this.Friend = friend;
             this.Message = message;

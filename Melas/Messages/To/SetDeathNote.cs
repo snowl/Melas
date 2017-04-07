@@ -2,21 +2,21 @@
 
 namespace Melas.Messages.To
 {
-    public class AddFriend : ClientMessage
+    public class SetDeathNote : ClientMessage
     {
-        private String Name;
+        private String DeathNote;
 
-        public AddFriend(String Name)
+        public SetDeathNote(String DeathNote)
         {
-            this.Name = Name;
+            this.DeathNote = DeathNote;
         }
 
         public override byte[] Serialize()
         {
             ByteWriter writer = new ByteWriter();
 
-            writer.Write((byte)25); // ID
-            writer.Write(Name);
+            writer.Write((byte)18); // ID
+            writer.Write(DeathNote);
             writer.Write((byte)0);
 
             return writer.Complete();

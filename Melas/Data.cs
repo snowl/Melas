@@ -1,16 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Melas
+﻿namespace Melas
 {
+    public enum GameMode
+    {
+        Classic = 1,
+        Custom = 2,
+        All_Any = 3,
+        Rapid = 4,
+        Vigilantics = 5,
+        Ranked = 6,
+        Rainbow = 7,
+        Ranked_Practice = 8
+    }
+
     public enum AFKStatus
     {
         Online,
         AFK,
         DCDueToInactivity
+    }
+    
+    public enum InviteAction
+    {
+        Deny = 1,
+        Accept = 3
     }
 
     public enum Server

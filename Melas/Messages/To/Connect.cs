@@ -21,7 +21,7 @@ namespace Melas.Messages.To
             writer.Write((byte)2); //ID 2
             writer.Write((byte)3);
             writer.Write(this.Username);
-            writer.Write("*76561197995252609*");
+            writer.Write((byte)30);
             writer.Write(this.AuthToken);
             writer.Write((byte)0);
 
