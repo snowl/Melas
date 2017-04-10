@@ -64,6 +64,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -87,11 +88,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BrowserBridge\Bridge.cs" />
+    <Compile Include="BrowserBridge\FlashWindow.cs" />
     <Compile Include="BrowserBridge\LoginResult.cs" />
     <Compile Include="CustomSchemeHandlerFactory.cs" />
     <Compile Include="CustomSchemeHandler.cs" />
+    <Compile Include="SavedUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DPAPI.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

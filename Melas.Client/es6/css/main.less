@@ -1,0 +1,186 @@
+@import 'colors.less';
+
+@friend-list-width: 250px;
+
+.melas
+{
+    height: 100%;
+}
+
+.user-info
+{
+    background-color: white;
+    border-bottom: 1px solid @border-color;
+    border-top: 1px solid white;
+
+    & > .user-name,
+    & > .log-out
+    {
+        color: @muted-text;
+        padding: 10px 20px;
+    }
+
+    & > .user-name
+    {
+        padding: 10px 20px;
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    & > .log-out
+    {
+        float: right;
+        margin-right: 20px;
+
+        &:hover
+        {
+            cursor: pointer;
+            background-color: @muted-hover-color;
+        }
+    }
+}
+
+.chat-bar
+{
+    background-color: @chat-bar;
+    border-bottom: 1px solid @chat-bar;
+
+    & > .friend,
+    & > .open-friend-list
+    {
+        color: white;
+    }
+
+    & > .friend
+    {
+        display: inline-block;
+        margin-left: 15px;
+        padding: 10px 0;
+
+        &:hover
+        {
+            cursor: pointer;
+            background-color: @chat-bar-hover;
+        }
+
+        & > .status
+        {
+            height: 4px;
+            margin-top: -10px;
+
+            &.online { background-color: @online; }
+            &.active { background-color: @active; }
+            &.offline { background-color: @offline; }
+            &.in-game { background-color: @in-game; }
+            &.in-lobby { background-color: @in-lobby; }
+            &.away { background-color: @away; }
+        }
+
+        & > .user-name
+        {
+            margin-top: 5px;
+            padding: 0 25px;
+        }
+    }
+
+    & > .open-friend-list
+    {
+        float: right;
+        margin-right: 20px;
+        padding: 10px 25px;
+
+        &:hover
+        {
+            cursor: pointer;
+            background-color: @chat-bar-hover;
+        }
+    }
+}
+
+.salem-container
+{
+    height: ~"calc(100% - 84px)";
+}
+
+.main-container
+{
+    display: inline-block;
+    max-height: 100%;
+    overflow: auto;
+    width: 100%;
+
+    &.open-friend-list
+    {
+        width: ~"calc(100% - @{friend-list-width})";
+    }
+}
+
+.friend-list
+{
+    display: none;
+    height: 100%;
+    max-height: 100%;
+    background-color: #353535;
+    width: @friend-list-width;
+
+    &.open
+    {
+        display: inline-block;
+    }
+
+    & > .add-friend
+    {
+        width: 250px;
+        position: absolute;
+        bottom: 41px;
+
+        & > .friend-input
+        {
+            display: inline-block;
+            height: 35px;
+            border: 0px;
+            width: 240px;
+            font-size: 16px;
+            padding-left: 10px;
+            outline: none;
+        }
+    }
+
+    & > .friends
+    {
+        height: ~"calc(100% - 37px)";
+        overflow: auto;
+
+        & > .friend
+        {
+            color: #d8d6d6;
+            padding: 10px 0;
+
+            &:hover
+            {
+                cursor: default;
+                background-color: @chat-bar-hover;
+            }
+
+            & > .status
+            {
+                width: 4px;
+                float: left;
+                height: 41px;
+                margin-top: -10px;
+
+                &.online { background-color: @online; }
+                &.active { background-color: @active; }
+                &.offline { background-color: @offline; }
+                &.in-game { background-color: @in-game; }
+                &.in-lobby { background-color: @in-lobby; }
+                &.away { background-color: @away; }
+            }
+
+            & > .user-name
+            {
+                padding: 0 25px;
+            }
+        }
+    }
+}

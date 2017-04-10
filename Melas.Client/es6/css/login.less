@@ -1,0 +1,96 @@
+@import 'colors.less';
+
+.login-box
+{
+    width: 40%;
+    min-width: 300px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+
+    & > .header
+    {
+        font-weight: lighter;
+        font-size: 40px;
+        padding-bottom: 10px;
+    }
+
+    & .input-holder
+    {
+        padding: 0 15px 10px 10px;
+
+        input
+        {
+            border: 0px;
+            color: @very-muted-text;
+            height: 30px;
+            width: 100%;
+            font-size: 14px;
+            padding-left: 5px;
+            display: block;
+            outline: none;
+
+            &:focus
+            {
+                color: black;
+            }
+        }
+    }
+
+    & .connect
+    {
+        margin: 0 -10px;
+        padding: 6px;
+        color: @base-button-text;
+        background-color: @base-button-color;
+
+        &:hover
+        {
+            cursor: pointer;
+            color: @base-button-hover-text;
+            background-color: @base-button-hover-color;
+        }
+    }
+
+    & .remember-me
+    {
+        margin: 10px -10px 10px;
+        padding: 6px;
+        color: @base-button-text;
+        background-color: @base-button-color;
+
+        &:hover,
+        {
+            cursor: pointer;
+            color: @base-button-hover-text;
+            background-color: @base-button-hover-color;
+        }
+
+        &.toggled
+        {
+            color: @remember-me-text;
+            background-color: @remember-me-color;
+
+            &:hover
+            {
+                background-color: @remember-me-hover-color;
+            }
+        }
+    }
+
+    & .connecting
+    {
+        color: @muted-text;
+        font-weight: lighter;
+        padding-bottom: 10px;
+    }
+}
+
+.error
+{
+    background-color: red;
+    color: white;
+    padding: 5px;
+    font-weight: lighter;
+    margin: 0px -10px 10px;
+}

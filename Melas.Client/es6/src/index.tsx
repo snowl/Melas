@@ -6,6 +6,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import {syncHistoryWithStore} from 'mobx-react-router';
 import {Provider} from 'mobx-react'
 import {Route, Router} from 'react-router'
+import 'reflect-metadata'
 
 syncHistoryWithStore(createBrowserHistory(), Stores.routing);
 

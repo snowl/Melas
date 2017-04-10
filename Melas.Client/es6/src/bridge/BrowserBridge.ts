@@ -6,19 +6,24 @@ export class LoginResult
 
 export class ClientBridge
 {
-    login: (username: string, password: string, callback: (result: string) => any) => void;
+    focus: () => void;
+    flash: () => void;
+
+    getSavedCredentials: () => Promise<string>;
+    login: (username: string, password: string, save: boolean, callback: (result: string) => any) => void;
+    logout: () => Promise<void>;
 }
 
 export class ServerBridge
 {
-    private callbacks: {(object: string): void;} [];
+    private callbacks: {(object: any): void;} [];
     
     constructor()
     {
         this.callbacks = [];
     }
 
-    public pushMessage(object: string)
+    public pushMessage(object: any)
     {
         for (let callback of this.callbacks)
         {
@@ -26,7 +31,7 @@ export class ServerBridge
         }
     }
 
-    public registerMessageListener(listener: {(object: string): void;})
+    public registerMessageListener(listener: {(object: any): void;})
     {
         this.callbacks.push(listener);
     }

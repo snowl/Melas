@@ -20,8 +20,8 @@ export default class Main extends React.Component<any, any>
     {
         return <div>
             <Switch>
-                <Route path="/login" component={Login}/>
-                <Route path="/salem" component={Salem}/>
+                <Route path="/login" render={props => <Login/>}/>
+                <Route path="/salem" render={props => <Salem/>}/>
             </Switch>
         </div>
     }

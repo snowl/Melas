@@ -1,6 +1,7 @@
 ﻿using Melas.Messages;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -60,9 +61,9 @@ namespace Melas
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Exception thrown.");
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
+                    Debug.WriteLine("Exception thrown.");
+                    Debug.WriteLine(e.Message);
+                    Debug.WriteLine(e.StackTrace);
                 }
             }
         }
@@ -111,14 +112,20 @@ namespace Melas
             ByteReader reader = new ByteReader(buffer, available);
             reader.NeedsMoreData += async (s, e) =>
             {
-                await ReadFromStreamAsync();
-                reader.ReplaceBuffer(buffer, available);
+                try
+                {
+                    await ReadFromStreamAsync();
+                    reader.ReplaceBuffer(buffer, available);
+                }
+#pragma warning disable CS0168
+                catch (Exception ignored) { }
+#pragma warning restore CS0168
             };
             byte ID = reader.ReadByte();
 
             Type type = PacketTypes[ID];
             if (type == null)
-                Console.WriteLine("Got packet ID " + ID + "!");
+                Debug.WriteLine("Got packet ID " + ID + "!");
 
             ServerMessage instance = (ServerMessage)Activator.CreateInstance(type);
             instance.Deserialize(reader);

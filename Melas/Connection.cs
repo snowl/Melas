@@ -21,8 +21,9 @@ namespace Melas
         public Boolean Connected { get; private set; }
         private String AuthToken { get; set; }
 
-        internal CancellationToken readerToken;
-        internal CancellationToken writerToken;
+        internal TcpClient tcp;
+        internal CancellationTokenSource readerToken;
+        internal CancellationTokenSource writerToken;
         internal Reader reader;
         internal Writer writer;
 
@@ -47,17 +48,17 @@ namespace Melas
                 }
             }
 
-            TcpClient tcp = new TcpClient() { NoDelay = true };
+            tcp = new TcpClient() { NoDelay = true };
             await tcp.ConnectAsync(address, Endpoints.Port);
             var stream = tcp.GetStream();
 
-            this.readerToken = new CancellationToken();
-            this.reader = new Reader(stream, readerToken);
+            this.readerToken = new CancellationTokenSource();
+            this.reader = new Reader(stream, readerToken.Token);
             this.reader.MessageDeserialized += Reader_MessageDeserialized;
             this.reader.RunAsync().Forget();
 
-            this.writerToken = new CancellationToken();
-            this.writer = new Writer(stream, writerToken);
+            this.writerToken = new CancellationTokenSource();
+            this.writer = new Writer(stream, writerToken.Token);
             this.writer.RunAsync().Forget();
 
             Connect connectPacket = new Connect(this.AuthToken);
@@ -65,6 +66,14 @@ namespace Melas
 
             this.Connected = true;
             return true;
+        }
+
+        public void Close()
+        {
+            this.readerToken.Cancel();
+            this.writerToken.Cancel();
+            tcp.Close();
+            this.Connected = false;
         }
 
         private void Reader_MessageDeserialized(object sender, MessageReceivedEventArgs e)
@@ -89,7 +98,7 @@ namespace Melas
             var response = await client.PostAsync(Endpoints.Login, content);
             var responseString = await response.Content.ReadAsStringAsync();
 
-            if (responseString.Contains("emptyError"))
+            if (responseString.Contains("emptyerror"))
             {
                 throw new Exception("No credentials provided");
             }
