@@ -118,7 +118,7 @@ namespace Melas
                     reader.ReplaceBuffer(buffer, available);
                 }
 #pragma warning disable CS0168
-                catch (Exception ignored) { }
+                catch (ObjectDisposedException ignored) { }
 #pragma warning restore CS0168
             };
             byte ID = reader.ReadByte();
