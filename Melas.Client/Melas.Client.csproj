@@ -116,6 +116,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="es6\css\base.less" />
+    <None Include="es6\css\colors.less" />
+    <None Include="es6\css\login.less" />
+    <None Include="es6\css\main.less" />
+    <None Include="es6\package.json" />
+    <None Include="es6\tsconfig.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,6 +138,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="es6\webpack.config.js" />
     <Content Include="Resources\.gitignore" />
     <EmbeddedResource Include="Resources\bundle.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -148,6 +155,21 @@
       <Project>{c3324b9f-269f-426a-af88-cba684cebe83}</Project>
       <Name>Melas</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="es6\src\bridge\BrowserBridge.ts" />
+    <TypeScriptCompile Include="es6\src\bridge\Message.ts" />
+    <TypeScriptCompile Include="es6\src\bridge\MessageHandler.ts" />
+    <TypeScriptCompile Include="es6\src\bridge\Messages\EmptyPacket.ts" />
+    <TypeScriptCompile Include="es6\src\bridge\Messages\UserInformation.ts" />
+    <TypeScriptCompile Include="es6\src\bridge\Messages\UserStatistics.ts" />
+    <TypeScriptCompile Include="es6\src\components\Login.tsx" />
+    <TypeScriptCompile Include="es6\src\components\Main.tsx" />
+    <TypeScriptCompile Include="es6\src\components\Salem.tsx" />
+    <TypeScriptCompile Include="es6\src\index.tsx" />
+    <TypeScriptCompile Include="es6\src\model\User.ts" />
+    <TypeScriptCompile Include="es6\src\stores\ClientStore.ts" />
+    <TypeScriptCompile Include="es6\src\stores\Stores.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\cef.redist.x64.3.2883.1552\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2883.1552\build\cef.redist.x64.targets')" />
